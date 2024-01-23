@@ -6,36 +6,49 @@ import common.generator.UserGenerator;
 import common.helpers.UserHelper;
 import common.request.CreateUserRequest;
 import common.request.PatchUserRequest;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
+@Epic("User Management")
 public class UserEndpointTest extends TestBase {
 
-    private static User user;
+    protected static User CREATED_USER;
     private static final CreateUserRequest createUserRequest = UserGenerator.createUserRequest();
 
-    @BeforeAll
-    static void createUser() {
-        user = UserHelper.createUser(createUserRequest);
+    @Before
+    public void createUser() {
+        CREATED_USER = UserHelper.createUser(createUserRequest);
+        Allure.step("Пользователь создан");
     }
 
     @Test
+    @Feature("Создание пользователя")
+    @Description("Test to verify successful user creation")
     public void successCreateUser() {
-        UserAssertions.validCreation(user, createUserRequest);
+        UserAssertions.validCreation(CREATED_USER, createUserRequest);
     }
 
     @Test
+    @Feature("Получение пользователя по id")
+    @Description("Test to verify successful retrieval of user")
     public void successGetUser() {
-        User actual = UserHelper.getUserById(user.getId());
-        assertEquals(user, actual);
+        User actual = UserHelper.getUserById(CREATED_USER.getId());
+        assertEquals(CREATED_USER, actual);
+        Allure.step("Пользователь получен");
     }
 
     @Test
+    @Feature("Обновление пользователя")
+    @Description("Test to verify successful patching of user")
     public void successPatchUser() {
         PatchUserRequest request = UserGenerator.createPatchRequest();
         User actual = UserHelper.patchUser(request);
-        UserAssertions.validUpdate(user, request, actual);
+        UserAssertions.validUpdate(CREATED_USER, request, actual);
     }
 }

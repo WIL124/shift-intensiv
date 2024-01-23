@@ -17,7 +17,7 @@ public class User {
     private String lastName;
     private String fullName;
     private String email;
-    private long phone;
+    private Long phone;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date registrationDate;
@@ -25,6 +25,6 @@ public class User {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date lastUpdateDate;
 
-    private int age;
+    private Integer age;
 
 }
