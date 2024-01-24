@@ -1,10 +1,10 @@
 package easy;
 
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.BeforeClass;
 
 public class TestBase {
-    @BeforeAll
+    @BeforeClass
     public static void setup() {
         RestAssured.baseURI = Constants.LOCALHOST_URL;
     }

@@ -9,3 +9,7 @@
 # Zeppelin ignored files
 /ZeppelinRemoteNotebooks/
 *.xml
+../.idea
+../.allure
+../target
+../allure-results
